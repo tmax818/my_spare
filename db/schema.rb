@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_165740) do
+ActiveRecord::Schema.define(version: 2019_04_15_193413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,28 +50,29 @@ ActiveRecord::Schema.define(version: 2019_04_15_165740) do
   create_table "items", force: :cascade do |t|
     t.bigint "category_id"
     t.string "name"
-    t.text "icon"
     t.string "size", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_items_on_category_id"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.string "zipcode"
+  create_table "requests", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_requests_on_item_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "item_id"
     t.string "name"
     t.string "phone"
     t.string "email"
+    t.boolean "requestor", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_users_on_item_id"
   end
 
 end

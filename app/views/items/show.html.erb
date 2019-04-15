@@ -1,0 +1,31 @@
+<%= @item.inspect %>
+<%= @user.inspect %>
+<h3>Cool, let's get you that <%= @item.name %>!</h3>
+<p>All donation requests are listed anonymously on our site.</p>
+<p>Your contact info is used to send updates about your request.</p>
+
+<%= image_tag "#{@item.name}.png" %>
+
+
+<%= form_for @user, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :phone %><br>
+    <%= form.phone_field :phone %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= form.text_area :email %>
+  </p>
+
+  <%= form.hidden_field(:item_id, value: @item.id) %>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

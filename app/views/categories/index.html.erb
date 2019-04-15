@@ -1,0 +1,14 @@
+<% @categories.each do |c| %>
+  <h1><%= c.name %></h1>
+  <% c.items.each do |i| %>
+    <div class="card">
+      <div class="box">
+      <%= link_to(image_tag("#{i.name}.png"), category_item_path(c.id, i.id)) %>
+      <h1><%= i.name %></h1>
+    </div>
+    </div>
+
+
+
+    <% end %>
+<% end %>
